@@ -78,7 +78,7 @@ Open <http://localhost:3000> in your browser. To stop the server, click the term
 
 1. Go to <https://supabase.com> and sign up (the free plan is fine).
 2. Click **New project**.
-3. **Name:** `zivo`. **Database password:** click *Generate a password* and save it somewhere safe. **Region:** *South Asia (Mumbai)*, the closest to Indian customers.
+3. **Name:** `zivo`. **Database password:** click *Generate a password* - Hyo1HuQd73PKTUz6 and save it somewhere safe. **Region:** *South Asia (Mumbai)*, the closest to Indian customers.
 4. Click **Create new project** and wait about 2 minutes until it's ready.
 
 ### 2.2 Run the SQL files (in this exact order)
@@ -296,11 +296,11 @@ Sign-up confirmations and password resets will then reach every customer.
 
 ### 7.2 Add the environment variables
 
-Before clicking Deploy, open **Environment Variables** and add **every variable from your `.env.local`**, one by one (name and value). You can also paste the whole file into the first box and Vercel splits it up.
+Before clicking the final button, open **Environment Variables** and add **every variable from your `.env.local`**. The easiest way is to click **Import .env** and choose your `.env.local` file. You can also paste the whole file into the first box (Vercel splits it up), or add them one by one with **+ Add More**. Leave **Environments** set to **Production and Preview**.
 
 For `NEXT_PUBLIC_SITE_URL`, enter your future Vercel URL, e.g. `https://zivo-shoes.vercel.app`. You can fix it after the first deploy.
 
-Click **Deploy** and wait about 2 minutes. 🎉
+Click **Create Project** (older Vercel screens call this button **Deploy**; it's the same thing) and wait about 2 minutes while it builds. 🎉
 
 ### 7.3 After the first deploy
 
