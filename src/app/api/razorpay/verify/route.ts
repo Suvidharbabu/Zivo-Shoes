@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { isSupabaseConfigured } from "@/lib/env";
 import { finalizePaidOrder } from "@/lib/orders";
 import { verifyPaymentSignature } from "@/lib/razorpay";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -13,6 +14,7 @@ const bodySchema = z.object({
 
 /** Called by the browser after Razorpay Checkout succeeds. Verifies the signature before marking the order paid. */
 export async function POST(request: Request) {
+  if (!isSupabaseConfigured()) return NextResponse.json({ error: "The store is not configured yet." }, { status: 503 });
   const supabase = await createClient();
   const {
     data: { user },

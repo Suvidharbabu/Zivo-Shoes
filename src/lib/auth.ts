@@ -1,4 +1,5 @@
 import "server-only";
+import { cookies } from "next/headers";
 import { cache } from "react";
 import { notFound, redirect } from "next/navigation";
 import { isSupabaseConfigured } from "@/lib/env";
@@ -14,6 +15,9 @@ export interface SessionUser {
 
 /** The signed-in user (verified with Supabase Auth) or null. Cached per request. */
 export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
+  // Reading cookies marks every page as per-request (the store is personalised
+  // and stock/prices must always be fresh), even before Supabase is configured.
+  await cookies();
   if (!isSupabaseConfigured()) return null;
   try {
     const supabase = await createClient();

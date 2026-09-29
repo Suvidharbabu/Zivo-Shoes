@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { isSupabaseConfigured } from "@/lib/env";
 import { orderTotals } from "@/lib/pricing";
 import { getRazorpay } from "@/lib/razorpay";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -38,6 +39,7 @@ function fail(error: string, status = 400) {
  * Razorpay order. All prices are read from the database — never from the client.
  */
 export async function POST(request: Request) {
+  if (!isSupabaseConfigured()) return fail("The store is not configured yet.", 503);
   const supabase = await createClient();
   const {
     data: { user },

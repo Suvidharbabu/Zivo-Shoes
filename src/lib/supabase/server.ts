@@ -1,7 +1,7 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { SUPABASE_ANON_KEY, SUPABASE_URL } from "@/lib/env";
+import { SUPABASE_ANON_KEY, SUPABASE_URL, isSupabaseConfigured } from "@/lib/env";
 
 /**
  * Supabase client for Server Components, Server Actions and Route Handlers.
@@ -9,6 +9,11 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL } from "@/lib/env";
  */
 export async function createClient() {
   const cookieStore = await cookies();
+  if (!isSupabaseConfigured()) {
+    throw new Error(
+      "Supabase is not configured: add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local (see SETUP.md).",
+    );
+  }
 
   return createServerClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     cookies: {
